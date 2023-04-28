@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Manga;
+use App\Entity\Serie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,25 @@ class MangaRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findBySerie(Serie $serie)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'Select m
+            FROM App\Entity\Manga m
+            WHERE m.serie = :serie
+            ORDER BY m.volume_number'
+        )->setParameter('serie', $serie);
+
+        return $query->getResult();
+    }
+
+    public function findAllOrderBy(string $param, string $order)
+    {
+        return $this->findBy(array(), array($param => $order));
     }
 
 //    /**

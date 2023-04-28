@@ -193,9 +193,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return ArrayCollection<int, Borrowing>
+     * @return Collection<int, Borrowing>
      */
-    public function getBorrowings(): ArrayCollection
+    public function getBorrowings(): Collection
     {
         return $this->borrowings;
     }

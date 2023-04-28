@@ -39,6 +39,11 @@ class SerieRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllOrderBy(string $param, string $order)
+    {
+        return $this->findBy(array(), array($param => $order));
+    }
+
 //    /**
 //     * @return Serie[] Returns an array of Serie objects
 //     */

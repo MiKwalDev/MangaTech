@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,8 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    public function index(SerieRepository $serieRepo): Response
     {
-        return $this->render('home/index.html.twig');
+        $series = $serieRepo->findAll();
+
+        return $this->render('client/home/index.html.twig', [
+            "series" => $series,
+        ]);
     }
 }

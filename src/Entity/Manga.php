@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MangaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MangaRepository::class)]
@@ -20,10 +21,10 @@ class Manga extends Book
     private ?Stock $stock = null;
 
     #[ORM\OneToMany(mappedBy: 'manga', targetEntity: Borrowing::class, orphanRemoval: true)]
-    private ArrayCollection $borrowings;
+    private Collection $borrowings;
 
     #[ORM\OneToMany(mappedBy: 'manga', targetEntity: Purchase::class, orphanRemoval: true)]
-    private ArrayCollection $purchases;
+    private Collection $purchases;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Image $image = null;
